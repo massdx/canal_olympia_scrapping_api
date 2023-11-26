@@ -432,12 +432,14 @@ export default class ScrappingService implements BaseService {
         return theaterInfos;
     }
 
-    public async escapeGameByTheaters() {
+    public async escapeGameByTheater(threater: string, lang: string): Promise<TheaterEscapeGameModel> {
         let response: AxiosResponse;
 
         try {
 
-            response = await axios.get(infos.baseUrl);
+            response = await axios.get(lang == 'en'
+                ? `${infos.baseUrl}/en/escape-game-en`
+                : `${infos.baseUrl}/escape-game`)
 
         } catch (error) {
 
@@ -449,6 +451,10 @@ export default class ScrappingService implements BaseService {
             throw Error(e.message);
         }
 
+        
+        const htmlRoot = cheerio.load(response.data);
+
+              const theaterName = htmlRoot("ul.theaters li").find();
         // escape game by theaters 
 
 

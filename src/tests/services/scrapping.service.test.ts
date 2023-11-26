@@ -1,4 +1,4 @@
-import ScrappingService from '../../services/scapping/scrapping.servive';
+import ScrappingService from '../../services/scapping/scrapping.service';
 import { describe, expect, test } from '@jest/globals';
 
 const scrappingService = new ScrappingService();
